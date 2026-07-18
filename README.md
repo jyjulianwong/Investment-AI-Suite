@@ -8,12 +8,12 @@ A landing page for the Investment AI Suite — a collection of AI-powered tools 
 
 | Repository | Description |
 |---|---|
-| [Investment-News-Analysis-AI](https://github.com/jyjulianwong/Investment-News-Analysis-AI) | AI-driven analysis of investment-relevant news |
-| [TradingAgents-Funds](https://github.com/jyjulianwong/TradingAgents-Funds) | Fund definitions and configurations for TradingAgents |
-| [TradingAgents-Funds-Runner](https://github.com/jyjulianwong/TradingAgents-Funds-Runner) | Runner for executing TradingAgents fund strategies |
-| [S3-Browser-TradingAgents-Funds-Runner](https://github.com/jyjulianwong/S3-Browser-TradingAgents-Funds-Runner) | S3-backed browser UI for TradingAgents Funds Runner |
-| [Investment-Fund-Reporting-AI](https://github.com/jyjulianwong/Investment-Fund-Reporting-AI) | AI-generated reporting for investment fund performance |
-| [Turtle-Quant-1](https://github.com/jyjulianwong/Turtle-Quant-1) | Standalone quantitative strategy inspired by the Turtle Trading rules |
+| [Investment-News-Analysis-AI](https://github.com/jyjulianwong/Investment-News-Analysis-AI) | A minimal web app + AWS serverless stack that aggregates daily news snippets and produces AI-generated investment analysis reports |
+| [TradingAgents-Funds](https://github.com/jyjulianwong/TradingAgents-Funds) | A forked, modified version of "TradingAgents: Multi-Agents LLM Financial Trading Framework" |
+| [TradingAgents-Funds-Runner](https://github.com/jyjulianwong/TradingAgents-Funds-Runner) | A local Docker-based runner that runs TradingAgents-Funds for a personal fund watchlist, converts each Markdown report to PDF, and uploads the result to a public AWS S3 bucket |
+| [S3-Browser-TradingAgents-Funds-Runner](https://github.com/jyjulianwong/S3-Browser-TradingAgents-Funds-Runner) | A simple explorer for Amazon S3 buckets |
+| [Investment-Fund-Reporting-AI](https://github.com/jyjulianwong/Investment-Fund-Reporting-AI) | A personal Claude Code automation project for maintaining a Google Sheets workbook that produces fund-style financial statements for a Hargreaves Lansdown Stocks & Shares ISA |
+| [Turtle-Quant-1](https://github.com/jyjulianwong/Turtle-Quant-1) | A personal algorithmic equity trading assistant |
 
 ## Development
 

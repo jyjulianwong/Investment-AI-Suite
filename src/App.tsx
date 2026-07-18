@@ -1,5 +1,6 @@
 import Header from './components/Header'
 import RepoGrid from './components/RepoGrid'
+import WorkflowDiagram from './components/WorkflowDiagram'
 
 export default function App() {
   return (
@@ -7,6 +8,7 @@ export default function App() {
       <Header />
       <main>
         <RepoGrid />
+        <WorkflowDiagram />
       </main>
       <footer className="border-t border-surface-border py-8 text-center text-xs text-gray-600">
         &copy; {new Date().getFullYear()} Julian Wong &mdash; Investment AI Suite

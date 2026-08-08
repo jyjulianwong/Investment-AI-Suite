@@ -11,7 +11,7 @@ export default function App() {
         <WorkflowDiagram />
       </main>
       <footer className="border-t border-surface-border py-8 text-center text-xs text-gray-600">
-        &copy; {new Date().getFullYear()} Julian Wong &mdash; Investment AI Suite
+        Authored by Julian Wong in 2026.
       </footer>
     </div>
   )

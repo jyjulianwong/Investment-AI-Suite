@@ -110,9 +110,13 @@ function ExternalNode({ name, role }: { name: string; role: string }) {
 function Connector({ label }: { label: string }) {
   return (
     <div className="ml-5 flex flex-col items-start gap-0.5 py-1.5">
-      <div className="h-2 w-px bg-gray-700" />
+      <div className="flex w-2.5 justify-center">
+        <div className="h-2 w-px bg-gray-700" />
+      </div>
       <span className="text-xs text-gray-600">{label}</span>
-      <div className="h-2 w-px bg-gray-700" />
+      <div className="flex w-2.5 justify-center">
+        <div className="h-2 w-px bg-gray-700" />
+      </div>
       <DownArrow />
     </div>
   )

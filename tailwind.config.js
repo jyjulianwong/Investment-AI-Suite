@@ -15,7 +15,7 @@ export default {
         },
       },
       fontFamily: {
-        sans: ['Open Sans', 'system-ui', 'sans-serif'],
+        sans: ['Geist', 'system-ui', 'sans-serif'],
         mono: ['JetBrains Mono', 'monospace'],
       },
     },

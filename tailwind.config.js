@@ -15,7 +15,7 @@ export default {
         },
       },
       fontFamily: {
-        sans: ['Helvetica Neue', 'Helvetica', 'Arial', 'sans-serif'],
+        sans: ['Baskervville', 'Georgia', 'serif'],
         mono: ['JetBrains Mono', 'monospace'],
       },
     },

@@ -4,10 +4,10 @@ export default function WorkflowDiagram() {
   return (
     <section className="border-t border-surface-border py-16">
       <div className="mx-auto max-w-6xl px-6">
-        <h2 className="mb-2 text-sm font-semibold uppercase tracking-widest text-gray-500">
+        <h2 className="sticky top-0 z-10 -mx-6 mb-2 border-b border-surface-border bg-surface/90 px-6 py-4 text-sm font-semibold uppercase tracking-widest text-gray-500 backdrop-blur">
           How the suite fits together
         </h2>
-        <p className="mb-12 max-w-2xl text-sm leading-relaxed text-gray-400">
+        <p className="mb-12 mt-10 max-w-2xl text-sm leading-relaxed text-gray-400">
           Most tools run independently. The TradingAgents cluster is the
           exception — four components form a continuous end-to-end pipeline from
           analysis library to report viewer.
@@ -24,23 +24,27 @@ export default function WorkflowDiagram() {
                 name="TradingAgents-Funds"
                 href={`${GITHUB_BASE}/TradingAgents-Funds`}
                 role="Fork of the open-source TradingAgents framework, extended to support fund ISINs by mapping them to representative proxy equity holdings"
+                delay={0}
               />
               <Connector label="library dependency, imported by" />
               <RepoNode
                 name="TradingAgents-Funds-Runner"
                 href={`${GITHUB_BASE}/TradingAgents-Funds-Runner`}
                 role="Local Docker runner that executes TradingAgents-Funds for a configured watchlist of tickers and ISINs, converts each Markdown report to PDF, and uploads it to S3"
+                delay={1}
               />
               <Connector label="uploads PDF reports to" />
               <ExternalNode
                 name="AWS S3 Bucket"
                 role="Publicly accessible storage for the generated PDF reports"
+                delay={2}
               />
               <Connector label="browsed via" />
               <RepoNode
                 name="S3 Browser"
                 href={`${GITHUB_BASE}/S3-Browser-TradingAgents-Funds-Runner`}
                 role="GitHub Pages-hosted file browser configured to list and open the PDF reports stored in the S3 bucket"
+                delay={3}
               />
             </div>
           </div>
@@ -55,16 +59,19 @@ export default function WorkflowDiagram() {
                 name="Investment News Analysis AI"
                 href={`${GITHUB_BASE}/Investment-News-Analysis-AI`}
                 role="Web app and AWS serverless stack — news snippets are submitted via a GitHub Pages client, aggregated in S3, then a LangGraph Lambda agent runs daily to produce an AI-written investment analysis report"
+                delay={0}
               />
               <RepoNode
                 name="Investment Fund Reporting AI"
                 href={`${GITHUB_BASE}/Investment-Fund-Reporting-AI`}
                 role="Claude Code automation that maintains a Google Sheets workbook with fund-style financial statements (P&L, balance sheet, returns) for a Hargreaves Lansdown Stocks & Shares ISA"
+                delay={1}
               />
               <RepoNode
                 name="Turtle Quant 1"
                 href={`${GITHUB_BASE}/Turtle-Quant-1`}
                 role="Algorithmic equity trading assistant with modular technical and support/resistance indicators, backtesting, hyperparameter tuning, and long-running jobs orchestrated on Google Cloud Run"
+                delay={2}
               />
             </div>
           </div>
@@ -78,17 +85,20 @@ function RepoNode({
   name,
   href,
   role,
+  delay = 0,
 }: {
   name: string
   href: string
   role: string
+  delay?: number
 }) {
   return (
     <a
       href={href}
       target="_blank"
       rel="noopener noreferrer"
-      className="group block rounded-lg border border-surface-border bg-surface-card p-4 transition-colors hover:border-accent/40"
+      className="animate-fly-in group block rounded-lg border border-surface-border bg-surface-card p-4 transition-colors hover:border-accent/40"
+      style={{ animationDelay: `${delay * 130}ms` }}
     >
       <p className="text-sm font-medium text-white transition-colors group-hover:text-accent">
         {name}
@@ -98,9 +108,20 @@ function RepoNode({
   )
 }
 
-function ExternalNode({ name, role }: { name: string; role: string }) {
+function ExternalNode({
+  name,
+  role,
+  delay = 0,
+}: {
+  name: string
+  role: string
+  delay?: number
+}) {
   return (
-    <div className="rounded-lg border border-dashed border-gray-700 bg-surface px-4 py-3">
+    <div
+      className="animate-fly-in rounded-lg border border-dashed border-gray-700 bg-surface px-4 py-3"
+      style={{ animationDelay: `${delay * 130}ms` }}
+    >
       <p className="text-sm font-medium text-gray-400">{name}</p>
       <p className="mt-1 text-xs text-gray-600">{role}</p>
     </div>

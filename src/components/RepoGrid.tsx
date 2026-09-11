@@ -1,5 +1,6 @@
 import { useGitHubRepos } from '../hooks/useGitHubRepos'
 import RepoCard from './RepoCard'
+import RevealOnScroll from './RevealOnScroll'
 
 export default function RepoGrid() {
   const repos = useGitHubRepos()
@@ -11,13 +12,9 @@ export default function RepoGrid() {
       </h2>
       <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
         {repos.map((repo, index) => (
-          <div
-            key={`${repo.config.owner}/${repo.config.name}`}
-            className="animate-fly-in"
-            style={{ animationDelay: `${index * 90}ms` }}
-          >
+          <RevealOnScroll key={`${repo.config.owner}/${repo.config.name}`} delay={index * 90}>
             <RepoCard repo={repo} />
-          </div>
+          </RevealOnScroll>
         ))}
       </div>
     </section>

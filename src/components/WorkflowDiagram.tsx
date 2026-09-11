@@ -1,3 +1,5 @@
+import RevealOnScroll from './RevealOnScroll'
+
 const GITHUB_BASE = 'https://github.com/jyjulianwong'
 
 export default function WorkflowDiagram() {
@@ -20,32 +22,36 @@ export default function WorkflowDiagram() {
               TradingAgents pipeline
             </p>
             <div className="flex flex-col">
-              <RepoNode
-                name="TradingAgents-Funds"
-                href={`${GITHUB_BASE}/TradingAgents-Funds`}
-                role="Fork of the open-source TradingAgents framework, extended to support fund ISINs by mapping them to representative proxy equity holdings"
-                delay={0}
-              />
+              <RevealOnScroll delay={0}>
+                <RepoNode
+                  name="TradingAgents-Funds"
+                  href={`${GITHUB_BASE}/TradingAgents-Funds`}
+                  role="Fork of the open-source TradingAgents framework, extended to support fund ISINs by mapping them to representative proxy equity holdings"
+                />
+              </RevealOnScroll>
               <Connector label="library dependency, imported by" />
-              <RepoNode
-                name="TradingAgents-Funds-Runner"
-                href={`${GITHUB_BASE}/TradingAgents-Funds-Runner`}
-                role="Local Docker runner that executes TradingAgents-Funds for a configured watchlist of tickers and ISINs, converts each Markdown report to PDF, and uploads it to S3"
-                delay={1}
-              />
+              <RevealOnScroll delay={130}>
+                <RepoNode
+                  name="TradingAgents-Funds-Runner"
+                  href={`${GITHUB_BASE}/TradingAgents-Funds-Runner`}
+                  role="Local Docker runner that executes TradingAgents-Funds for a configured watchlist of tickers and ISINs, converts each Markdown report to PDF, and uploads it to S3"
+                />
+              </RevealOnScroll>
               <Connector label="uploads PDF reports to" />
-              <ExternalNode
-                name="AWS S3 Bucket"
-                role="Publicly accessible storage for the generated PDF reports"
-                delay={2}
-              />
+              <RevealOnScroll delay={260}>
+                <ExternalNode
+                  name="AWS S3 Bucket"
+                  role="Publicly accessible storage for the generated PDF reports"
+                />
+              </RevealOnScroll>
               <Connector label="browsed via" />
-              <RepoNode
-                name="S3 Browser"
-                href={`${GITHUB_BASE}/S3-Browser-TradingAgents-Funds-Runner`}
-                role="GitHub Pages-hosted file browser configured to list and open the PDF reports stored in the S3 bucket"
-                delay={3}
-              />
+              <RevealOnScroll delay={390}>
+                <RepoNode
+                  name="S3 Browser"
+                  href={`${GITHUB_BASE}/S3-Browser-TradingAgents-Funds-Runner`}
+                  role="GitHub Pages-hosted file browser configured to list and open the PDF reports stored in the S3 bucket"
+                />
+              </RevealOnScroll>
             </div>
           </div>
 
@@ -55,24 +61,27 @@ export default function WorkflowDiagram() {
               Standalone tools
             </p>
             <div className="flex flex-col gap-4">
-              <RepoNode
-                name="Investment News Analysis AI"
-                href={`${GITHUB_BASE}/Investment-News-Analysis-AI`}
-                role="Web app and AWS serverless stack — news snippets are submitted via a GitHub Pages client, aggregated in S3, then a LangGraph Lambda agent runs daily to produce an AI-written investment analysis report"
-                delay={0}
-              />
-              <RepoNode
-                name="Investment Fund Reporting AI"
-                href={`${GITHUB_BASE}/Investment-Fund-Reporting-AI`}
-                role="Claude Code automation that maintains a Google Sheets workbook with fund-style financial statements (P&L, balance sheet, returns) for a Hargreaves Lansdown Stocks & Shares ISA"
-                delay={1}
-              />
-              <RepoNode
-                name="Turtle Quant 1"
-                href={`${GITHUB_BASE}/Turtle-Quant-1`}
-                role="Algorithmic equity trading assistant with modular technical and support/resistance indicators, backtesting, hyperparameter tuning, and long-running jobs orchestrated on Google Cloud Run"
-                delay={2}
-              />
+              <RevealOnScroll delay={0}>
+                <RepoNode
+                  name="Investment News Analysis AI"
+                  href={`${GITHUB_BASE}/Investment-News-Analysis-AI`}
+                  role="Web app and AWS serverless stack — news snippets are submitted via a GitHub Pages client, aggregated in S3, then a LangGraph Lambda agent runs daily to produce an AI-written investment analysis report"
+                />
+              </RevealOnScroll>
+              <RevealOnScroll delay={130}>
+                <RepoNode
+                  name="Investment Fund Reporting AI"
+                  href={`${GITHUB_BASE}/Investment-Fund-Reporting-AI`}
+                  role="Claude Code automation that maintains a Google Sheets workbook with fund-style financial statements (P&L, balance sheet, returns) for a Hargreaves Lansdown Stocks & Shares ISA"
+                />
+              </RevealOnScroll>
+              <RevealOnScroll delay={260}>
+                <RepoNode
+                  name="Turtle Quant 1"
+                  href={`${GITHUB_BASE}/Turtle-Quant-1`}
+                  role="Algorithmic equity trading assistant with modular technical and support/resistance indicators, backtesting, hyperparameter tuning, and long-running jobs orchestrated on Google Cloud Run"
+                />
+              </RevealOnScroll>
             </div>
           </div>
         </div>
@@ -85,20 +94,17 @@ function RepoNode({
   name,
   href,
   role,
-  delay = 0,
 }: {
   name: string
   href: string
   role: string
-  delay?: number
 }) {
   return (
     <a
       href={href}
       target="_blank"
       rel="noopener noreferrer"
-      className="animate-fly-in group block rounded-lg border border-surface-border bg-surface-card p-4 transition-colors hover:border-accent/40"
-      style={{ animationDelay: `${delay * 130}ms` }}
+      className="group block rounded-lg border border-surface-border bg-surface-card p-4 transition-colors hover:border-accent/40"
     >
       <p className="text-sm font-medium text-white transition-colors group-hover:text-accent">
         {name}
@@ -108,20 +114,9 @@ function RepoNode({
   )
 }
 
-function ExternalNode({
-  name,
-  role,
-  delay = 0,
-}: {
-  name: string
-  role: string
-  delay?: number
-}) {
+function ExternalNode({ name, role }: { name: string; role: string }) {
   return (
-    <div
-      className="animate-fly-in rounded-lg border border-dashed border-gray-700 bg-surface px-4 py-3"
-      style={{ animationDelay: `${delay * 130}ms` }}
-    >
+    <div className="rounded-lg border border-dashed border-gray-700 bg-surface px-4 py-3">
       <p className="text-sm font-medium text-gray-400">{name}</p>
       <p className="mt-1 text-xs text-gray-600">{role}</p>
     </div>

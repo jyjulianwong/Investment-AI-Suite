@@ -2,12 +2,12 @@ export default function Header() {
   return (
     <header className="border-b border-surface-border py-16 text-center">
       <div className="mx-auto max-w-3xl px-6">
-        <span className="mb-4 inline-block rounded-full border border-accent/30 bg-accent/10 px-3 py-1 font-mono text-xs text-accent">
-          AI-powered investing
-        </span>
-        <h1 className="mt-4 text-4xl font-bold tracking-tight text-white sm:text-5xl">
+        <h1 className="text-4xl font-bold tracking-tight text-white sm:text-5xl">
           Investment AI Suite
         </h1>
+        <span className="mt-4 inline-block rounded-full border border-accent/30 bg-accent/10 px-3 py-1 font-mono text-xs text-accent">
+          AI-powered investing
+        </span>
         <p className="mt-5 text-lg leading-relaxed text-gray-400">
           A collection of AI-powered tools for automating personal investment
           research, fund management, and reporting workflows.

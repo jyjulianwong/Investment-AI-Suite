@@ -12,7 +12,38 @@ export interface GitHubRepo {
   error: boolean
 }
 
+type CachedRepoData = Pick<
+  GitHubRepo,
+  'htmlUrl' | 'description' | 'language' | 'stargazersCount' | 'updatedAt'
+>
+
+const CACHE_TTL_MS = 24 * 60 * 60 * 1000
+const cacheKey = (config: RepoConfig) => `gh-repo-cache:${config.owner}/${config.name}`
+
+function readCache(config: RepoConfig): CachedRepoData | null {
+  try {
+    const raw = localStorage.getItem(cacheKey(config))
+    if (!raw) return null
+    const { data, cachedAt } = JSON.parse(raw) as { data: CachedRepoData; cachedAt: number }
+    if (Date.now() - cachedAt > CACHE_TTL_MS) return null
+    return data
+  } catch {
+    return null
+  }
+}
+
+function writeCache(config: RepoConfig, data: CachedRepoData) {
+  try {
+    localStorage.setItem(cacheKey(config), JSON.stringify({ data, cachedAt: Date.now() }))
+  } catch {
+    // localStorage unavailable or full; skip caching
+  }
+}
+
 async function fetchRepo(config: RepoConfig): Promise<GitHubRepo> {
+  const cached = readCache(config)
+  if (cached) return { config, ...cached, loading: false, error: false }
+
   const res = await fetch(
     `https://api.github.com/repos/${config.owner}/${config.name}`,
     { headers: { Accept: 'application/vnd.github.v3+json' } },
@@ -25,16 +56,15 @@ async function fetchRepo(config: RepoConfig): Promise<GitHubRepo> {
     stargazers_count: number
     updated_at: string
   }
-  return {
-    config,
+  const repoData: CachedRepoData = {
     htmlUrl: data.html_url,
     description: data.description,
     language: data.language,
     stargazersCount: data.stargazers_count,
     updatedAt: data.updated_at,
-    loading: false,
-    error: false,
   }
+  writeCache(config, repoData)
+  return { config, ...repoData, loading: false, error: false }
 }
 
 export function useGitHubRepos(): GitHubRepo[] {

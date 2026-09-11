@@ -29,7 +29,9 @@ export default function WorkflowDiagram() {
                   role="Fork of the open-source TradingAgents framework, extended to support fund ISINs by mapping them to representative proxy equity holdings"
                 />
               </RevealOnScroll>
-              <Connector label="library dependency, imported by" />
+              <RevealOnScroll delay={65}>
+                <Connector label="library dependency, imported by" />
+              </RevealOnScroll>
               <RevealOnScroll delay={130}>
                 <RepoNode
                   name="TradingAgents-Funds-Runner"
@@ -37,14 +39,18 @@ export default function WorkflowDiagram() {
                   role="Local Docker runner that executes TradingAgents-Funds for a configured watchlist of tickers and ISINs, converts each Markdown report to PDF, and uploads it to S3"
                 />
               </RevealOnScroll>
-              <Connector label="uploads PDF reports to" />
+              <RevealOnScroll delay={195}>
+                <Connector label="uploads PDF reports to" />
+              </RevealOnScroll>
               <RevealOnScroll delay={260}>
                 <ExternalNode
                   name="AWS S3 Bucket"
                   role="Publicly accessible storage for the generated PDF reports"
                 />
               </RevealOnScroll>
-              <Connector label="browsed via" />
+              <RevealOnScroll delay={325}>
+                <Connector label="browsed via" />
+              </RevealOnScroll>
               <RevealOnScroll delay={390}>
                 <RepoNode
                   name="S3 Browser"

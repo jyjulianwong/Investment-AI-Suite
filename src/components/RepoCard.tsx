@@ -23,7 +23,7 @@ export default function RepoCard({ repo }: RepoCardProps) {
   if (repo.loading) return <SkeletonCard />
 
   return (
-    <article className="group flex flex-col rounded-lg border border-surface-border bg-surface-card p-6 transition-colors hover:border-accent/40">
+    <article className="group flex h-full flex-col rounded-lg border border-surface-border bg-surface-card p-6 transition-colors hover:border-accent/40">
       <div className="flex-1">
         <h2 className="text-base font-semibold text-white group-hover:text-accent transition-colors leading-snug">
           {displayName}
@@ -74,7 +74,7 @@ export default function RepoCard({ repo }: RepoCardProps) {
 
 function SkeletonCard() {
   return (
-    <div className="flex flex-col rounded-lg border border-surface-border bg-surface-card p-6 animate-pulse">
+    <div className="flex h-full flex-col rounded-lg border border-surface-border bg-surface-card p-6 animate-pulse">
       <div className="h-4 w-3/4 rounded bg-gray-800" />
       <div className="mt-3 space-y-2">
         <div className="h-3 w-full rounded bg-gray-800" />

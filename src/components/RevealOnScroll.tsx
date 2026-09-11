@@ -30,7 +30,7 @@ export default function RevealOnScroll({ children, delay = 0, className = '' }: 
   return (
     <div
       ref={ref}
-      className={`${visible ? 'animate-fly-in' : 'fly-in-hidden'} ${className}`}
+      className={`h-full ${visible ? 'animate-fly-in' : 'fly-in-hidden'} ${className}`}
       style={{ animationDelay: `${delay}ms` }}
     >
       {children}

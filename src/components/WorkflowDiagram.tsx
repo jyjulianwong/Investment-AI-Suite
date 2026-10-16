@@ -88,6 +88,13 @@ export default function WorkflowDiagram() {
                   role="Algorithmic equity trading assistant with modular technical and support/resistance indicators, backtesting, hyperparameter tuning, and long-running jobs orchestrated on Google Cloud Run"
                 />
               </RevealOnScroll>
+              <RevealOnScroll delay={390}>
+                <RepoNode
+                  name="Market Regime Detector"
+                  href={`${GITHUB_BASE}/Market-Regime-Detector`}
+                  role="A macro-economic regime classification model based on the Bridgewater All Weather macro quadrants"
+                />
+              </RevealOnScroll>
             </div>
           </div>
         </div>

@@ -25,13 +25,11 @@ npm run dev
 
 ## Adding a new repo
 
-Open `src/data/repos.ts` and append an entry to the `REPOS` array:
+Three places need updating — see `CLAUDE.md` for the full checklist:
 
-```ts
-{ owner: 'jyjulianwong', name: 'Your-New-Repo' },
-```
-
-All metadata (description, language, stars) is fetched live from the GitHub API — no other changes needed.
+1. `src/data/repos.ts` — append `{ owner: 'jyjulianwong', name: 'Your-New-Repo' }` to the `REPOS` array (metadata is fetched live from the GitHub API).
+2. `README.md` — add a row to the table above.
+3. `src/components/WorkflowDiagram.tsx` — add a node to the "How the suite fits together" diagram.
 
 ## Deployment
 

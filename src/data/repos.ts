@@ -14,4 +14,5 @@ export const REPOS: RepoConfig[] = [
   { owner: 'jyjulianwong', name: 'S3-Browser-TradingAgents-Funds-Runner' },
   { owner: 'jyjulianwong', name: 'Investment-Fund-Reporting-AI' },
   { owner: 'jyjulianwong', name: 'Turtle-Quant-1' },
+  { owner: 'jyjulianwong', name: 'Market-Regime-Detector' },
 ]

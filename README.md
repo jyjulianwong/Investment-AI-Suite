@@ -14,7 +14,7 @@ A landing page for the Investment AI Suite — a collection of AI-powered tools 
 | [S3-Browser-TradingAgents-Funds-Runner](https://github.com/jyjulianwong/S3-Browser-TradingAgents-Funds-Runner) | A simple explorer for Amazon S3 buckets |
 | [Investment-Fund-Reporting-AI](https://github.com/jyjulianwong/Investment-Fund-Reporting-AI) | A personal Claude Code automation project for maintaining a Google Sheets workbook that produces fund-style financial statements for a Hargreaves Lansdown Stocks & Shares ISA |
 | [Turtle-Quant-1](https://github.com/jyjulianwong/Turtle-Quant-1) | A personal algorithmic equity trading assistant |
-| [Market-Regime-Detector](https://github.com/jyjulianwong/Market-Regime-Detector) | Nowcasts Bridgewater All Weather macro quadrants (growth × inflation) from a daily batch pipeline of two independent Gaussian HMMs, served by a read-only API |
+| [Market-Regime-Detector](https://github.com/jyjulianwong/Market-Regime-Detector) | A macro-economic regime classification model based on the Bridgewater All Weather macro quadrants |
 
 ## Development
 

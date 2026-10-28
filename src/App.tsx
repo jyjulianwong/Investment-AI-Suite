@@ -1,6 +1,7 @@
 import Header from './components/Header'
 import RepoGrid from './components/RepoGrid'
 import WorkflowDiagram from './components/WorkflowDiagram'
+import BuyVsBuild from './components/BuyVsBuild'
 
 export default function App() {
   return (
@@ -9,6 +10,7 @@ export default function App() {
       <main>
         <RepoGrid />
         <WorkflowDiagram />
+        <BuyVsBuild />
       </main>
       <footer className="border-t border-surface-border py-8 text-center text-xs text-gray-600">
         Authored by Julian Wong in 2026.

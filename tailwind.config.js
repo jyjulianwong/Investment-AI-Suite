@@ -4,19 +4,25 @@ export default {
   theme: {
     extend: {
       colors: {
-        surface: {
-          DEFAULT: '#0d1117',
-          card: '#161b22',
-          border: '#30363d',
+        ink: {
+          950: '#060913',
+          900: '#0a0f1f',
+          800: '#10172b',
         },
-        accent: {
-          DEFAULT: '#2dd4bf',
-          hover: '#14b8a6',
+        gold: {
+          DEFAULT: '#e7c47e',
+          soft: '#f3ddae',
+          deep: '#a8803c',
+        },
+        mint: {
+          DEFAULT: '#5ce1c6',
+          deep: '#1f9e88',
         },
       },
       fontFamily: {
-        sans: ['Open Sans', 'system-ui', 'sans-serif'],
-        mono: ['JetBrains Mono', 'monospace'],
+        serif: ['"Playfair Display"', 'Georgia', 'serif'],
+        sans: ['Inter', 'system-ui', 'sans-serif'],
+        mono: ['"JetBrains Mono"', 'ui-monospace', 'monospace'],
       },
     },
   },

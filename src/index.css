@@ -3,16 +3,160 @@
 @tailwind utilities;
 
 @layer base {
+  html {
+    color-scheme: dark;
+    scroll-behavior: smooth;
+  }
+
   body {
-    background-color: #0d1117;
-    color: #e6edf3;
+    background-color: #060913;
+    color: #e2e8f0;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
   }
 
+  /* Playfair defaults to old-style figures; finance wants lining numerals */
+  .font-serif {
+    font-variant-numeric: lining-nums;
+  }
+
   ::selection {
-    background-color: #2dd4bf33;
-    color: #2dd4bf;
+    background-color: #e7c47e33;
+    color: #f3ddae;
+  }
+
+  a:focus-visible,
+  button:focus-visible {
+    outline: 2px solid #e7c47e;
+    outline-offset: 3px;
+    border-radius: 0.5rem;
+  }
+}
+
+@layer components {
+  /* ── Ambient background ─────────────────────────────── */
+  .aurora {
+    position: fixed;
+    inset: 0;
+    z-index: -1;
+    overflow: hidden;
+    background: radial-gradient(ellipse 120% 80% at 50% -10%, #111c38 0%, #060913 62%);
+  }
+
+  .aurora::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background-image:
+      linear-gradient(rgba(255, 255, 255, 0.035) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(255, 255, 255, 0.035) 1px, transparent 1px);
+    background-size: 64px 64px;
+    -webkit-mask-image: radial-gradient(ellipse 70% 55% at 50% 15%, #000 0%, transparent 75%);
+    mask-image: radial-gradient(ellipse 70% 55% at 50% 15%, #000 0%, transparent 75%);
+  }
+
+  .orb {
+    position: absolute;
+    border-radius: 9999px;
+    filter: blur(100px);
+    opacity: 0.32;
+    will-change: transform;
+    animation: drift 30s ease-in-out infinite alternate;
+  }
+
+  /* ── Glass ──────────────────────────────────────────── */
+  .glass {
+    position: relative;
+    background: linear-gradient(145deg, rgba(255, 255, 255, 0.075), rgba(255, 255, 255, 0.022));
+    border: 1px solid rgba(255, 255, 255, 0.09);
+    -webkit-backdrop-filter: blur(20px) saturate(150%);
+    backdrop-filter: blur(20px) saturate(150%);
+    box-shadow:
+      inset 0 1px 0 rgba(255, 255, 255, 0.07),
+      0 24px 48px -28px rgba(0, 0, 0, 0.7);
+  }
+
+  /* Cursor-following highlight; --mx/--my are set by useSpotlight */
+  .spotlight {
+    transition:
+      transform 0.3s cubic-bezier(0.16, 1, 0.3, 1),
+      border-color 0.3s ease;
+  }
+
+  .spotlight::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    border-radius: inherit;
+    pointer-events: none;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+    background: radial-gradient(360px circle at var(--mx, 50%) var(--my, 50%), rgba(231, 196, 126, 0.15), transparent 60%);
+  }
+
+  .spotlight:hover,
+  .spotlight:focus-visible {
+    transform: translateY(-3px);
+    border-color: rgba(231, 196, 126, 0.38);
+  }
+
+  .spotlight:hover::before,
+  .spotlight:focus-visible::before {
+    opacity: 1;
+  }
+
+  /* ── Type & colour helpers ──────────────────────────── */
+  .text-gold-gradient {
+    background: linear-gradient(120deg, #f3ddae 0%, #e7c47e 45%, #b98a3e 100%);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+  }
+
+  .text-ivory-gradient {
+    background: linear-gradient(180deg, #ffffff 30%, #a9b4c9 100%);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+  }
+
+  /* ── Flowing connector between pipeline nodes ───────── */
+  .flow-line {
+    position: relative;
+    width: 2px;
+    background-image: repeating-linear-gradient(to bottom, #e7c47e 0 5px, transparent 5px 11px);
+    background-size: 2px 11px;
+    animation: flow 1.1s linear infinite;
+    opacity: 0.75;
+  }
+
+  .flow-arrow {
+    position: absolute;
+    bottom: -2px;
+    left: 50%;
+    width: 0;
+    height: 0;
+    transform: translateX(-50%);
+    border-left: 4.5px solid transparent;
+    border-right: 4.5px solid transparent;
+    border-top: 6px solid #e7c47e;
+  }
+
+  .shimmer {
+    background: linear-gradient(100deg, rgba(255, 255, 255, 0.04) 20%, rgba(255, 255, 255, 0.11) 40%, rgba(255, 255, 255, 0.04) 60%);
+    background-size: 200% 100%;
+    animation: shimmer 1.6s linear infinite;
+  }
+
+  .plot-grid {
+    background-image: linear-gradient(to right, rgba(255, 255, 255, 0.07) 1px, transparent 1px);
+    background-size: 25% 100%;
+    border-right: 1px solid rgba(255, 255, 255, 0.07);
+  }
+
+  .bar-grow {
+    transform-origin: left center;
+    transition: transform 1.1s cubic-bezier(0.16, 1, 0.3, 1);
   }
 }
 
@@ -28,12 +172,104 @@
     }
   }
 
+  @keyframes drift {
+    from {
+      transform: translate3d(0, 0, 0) scale(1);
+    }
+    to {
+      transform: translate3d(60px, 40px, 0) scale(1.15);
+    }
+  }
+
+  @keyframes flow {
+    to {
+      background-position: 0 11px;
+    }
+  }
+
+  @keyframes shimmer {
+    to {
+      background-position: -200% 0;
+    }
+  }
+
+  @keyframes draw {
+    from {
+      stroke-dashoffset: 1;
+    }
+    to {
+      stroke-dashoffset: 0;
+    }
+  }
+
+  @keyframes fade-in {
+    from {
+      opacity: 0;
+    }
+    to {
+      opacity: 1;
+    }
+  }
+
   .animate-fly-in {
-    animation: fly-in 0.7s cubic-bezier(0.16, 1, 0.3, 1) both;
+    animation: fly-in 0.8s cubic-bezier(0.16, 1, 0.3, 1) both;
   }
 
   .fly-in-hidden {
     opacity: 0;
     transform: translateY(28px) scale(0.98);
+  }
+
+  .hero-rise {
+    animation: fly-in 1s cubic-bezier(0.16, 1, 0.3, 1) both;
+  }
+
+  .draw-line {
+    stroke-dasharray: 1;
+    stroke-dashoffset: 1;
+    animation: draw 2.6s cubic-bezier(0.45, 0, 0.2, 1) 0.4s forwards;
+  }
+
+  .fade-area {
+    opacity: 0;
+    animation: fade-in 1.6s ease-out 1.6s forwards;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+
+  .orb,
+  .flow-line,
+  .shimmer,
+  .hero-rise,
+  .animate-fly-in {
+    animation: none;
+  }
+
+  .fly-in-hidden {
+    opacity: 1;
+    transform: none;
+  }
+
+  .draw-line {
+    animation: none;
+    stroke-dashoffset: 0;
+  }
+
+  .fade-area {
+    animation: none;
+    opacity: 1;
+  }
+
+  .bar-grow {
+    transition: none;
+  }
+
+  .spotlight,
+  .spotlight:hover {
+    transform: none;
   }
 }

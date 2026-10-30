@@ -34,18 +34,7 @@ export default function Header() {
       <HeroChart />
 
       <div className="relative mx-auto max-w-3xl">
-        <span className="hero-rise glass inline-flex items-center gap-2.5 rounded-full px-4 py-1.5 font-mono text-xs tracking-wide text-gold">
-          <span className="relative flex h-2 w-2" aria-hidden="true">
-            <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-gold/60" />
-            <span className="relative inline-flex h-2 w-2 rounded-full bg-gold" />
-          </span>
-          AI-powered investing
-        </span>
-
-        <h1
-          className="hero-rise mt-8 font-serif text-5xl font-semibold leading-[1.05] tracking-tight sm:text-7xl"
-          style={{ animationDelay: '120ms' }}
-        >
+        <h1 className="hero-rise font-serif text-5xl font-semibold leading-[1.05] tracking-tight sm:text-7xl">
           <span className="text-ivory-gradient">Investment </span>
           <em className="text-gold-gradient pr-1 font-medium">AI</em>
           <span className="text-ivory-gradient"> Suite</span>
@@ -53,7 +42,7 @@ export default function Header() {
 
         <p
           className="hero-rise mx-auto mt-7 max-w-2xl text-lg leading-relaxed text-slate-300"
-          style={{ animationDelay: '240ms' }}
+          style={{ animationDelay: '120ms' }}
         >
           A collection of AI-powered tools for automating personal investment research, fund management, and reporting
           workflows.
@@ -64,8 +53,12 @@ export default function Header() {
           target="_blank"
           rel="noopener noreferrer"
           className="hero-rise glass mt-9 inline-flex items-center gap-2.5 rounded-full px-5 py-2.5 text-sm text-slate-200 transition-colors duration-200 hover:border-gold/40 hover:text-gold"
-          style={{ animationDelay: '360ms' }}
+          style={{ animationDelay: '240ms' }}
         >
+          <span className="relative flex h-2 w-2" aria-hidden="true">
+            <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-gold/60" />
+            <span className="relative inline-flex h-2 w-2 rounded-full bg-gold" />
+          </span>
           <GitHubIcon />
           jyjulianwong
         </a>

@@ -19,7 +19,7 @@ export default function App() {
       </main>
       <footer className="mx-auto max-w-6xl px-6 pb-12 pt-4">
         <div className="h-px bg-gradient-to-r from-transparent via-white/15 to-transparent" />
-        <p className="pt-8 text-center font-serif text-sm italic text-slate-400">Authored by Julian Wong in 2026.</p>
+        <p className="pt-8 text-center font-serif text-sm text-slate-400">Authored by Julian Wong in 2026.</p>
       </footer>
     </div>
   )

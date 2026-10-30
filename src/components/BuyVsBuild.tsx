@@ -194,7 +194,7 @@ function Stat({
         />
       )}
       <p className="relative text-[11px] uppercase tracking-[0.18em] text-slate-300">{label}</p>
-      <p className={`relative mt-3 font-serif text-3xl font-semibold lining-nums tabular-nums ${valueColor}`}>{value}</p>
+      <p className={`relative mt-3 text-right font-serif text-3xl font-semibold lining-nums tabular-nums ${valueColor}`}>{value}</p>
       <p className="relative mt-1.5 text-xs text-slate-400">{sub}</p>
     </div>
   )

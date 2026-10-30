@@ -1,8 +1,6 @@
 # Investment AI Suite
 
-A landing page for the Investment AI Suite — a collection of AI-powered tools for automating personal investment research, fund management, and reporting workflows.
-
-**Live site:** https://jyjulianwong.github.io/Investment-AI-Suite/
+A landing page for the [Investment AI Suite](https://jyjulianwong.github.io/Investment-AI-Suite/) — a collection of AI-powered tools for automating personal investment research, fund management, and reporting workflows.
 
 ## Repositories in the suite
 

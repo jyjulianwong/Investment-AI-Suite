@@ -1,4 +1,5 @@
-import { useEffect, useRef, useState, type ReactNode } from 'react'
+import type { ReactNode } from 'react'
+import { useInView } from '../hooks/useInView'
 
 interface RevealOnScrollProps {
   children: ReactNode
@@ -7,25 +8,7 @@ interface RevealOnScrollProps {
 }
 
 export default function RevealOnScroll({ children, delay = 0, className = '' }: RevealOnScrollProps) {
-  const ref = useRef<HTMLDivElement>(null)
-  const [visible, setVisible] = useState(false)
-
-  useEffect(() => {
-    const node = ref.current
-    if (!node) return
-
-    const observer = new IntersectionObserver(
-      ([entry]) => {
-        if (entry.isIntersecting) {
-          setVisible(true)
-          observer.disconnect()
-        }
-      },
-      { threshold: 0.15, rootMargin: '0px 0px -40px 0px' },
-    )
-    observer.observe(node)
-    return () => observer.disconnect()
-  }, [])
+  const [ref, visible] = useInView<HTMLDivElement>()
 
   return (
     <div

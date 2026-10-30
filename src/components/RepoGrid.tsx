@@ -1,16 +1,15 @@
 import { useGitHubRepos } from '../hooks/useGitHubRepos'
 import RepoCard from './RepoCard'
 import RevealOnScroll from './RevealOnScroll'
+import SectionHeading from './SectionHeading'
 
 export default function RepoGrid() {
   const repos = useGitHubRepos()
 
   return (
-    <section className="mx-auto max-w-6xl px-6 py-16">
-      <h2 className="sticky top-0 z-10 -mx-6 mb-8 border-b border-surface-border bg-surface/90 px-6 py-4 text-sm font-semibold uppercase tracking-widest text-gray-500 backdrop-blur">
-        Repositories
-      </h2>
-      <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+    <section className="mx-auto max-w-6xl px-6 py-20">
+      <SectionHeading index="01" title="Repositories" />
+      <div className="grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
         {repos.map((repo, index) => (
           <RevealOnScroll key={`${repo.config.owner}/${repo.config.name}`} delay={index * 90}>
             <RepoCard repo={repo} />

@@ -1,6 +1,7 @@
 import { useEffect, useState, type ReactNode } from 'react'
 import {
   BUY_VS_BUILD_AS_OF,
+  BUY_VS_BUILD_DEV_GBP_PER_YEAR,
   BUY_VS_BUILD_FOOTNOTES,
   BUY_VS_BUILD_NOTES,
   BUY_VS_BUILD_PROJECTS,
@@ -17,7 +18,8 @@ export default function BuyVsBuild() {
   const projects = BUY_VS_BUILD_PROJECTS
   const saasTotal = projects.reduce((sum, p) => sum + p.estimateGbpPerYear, 0)
   const allActualsKnown = projects.every((p) => p.actualGbpPerYear !== null)
-  const actualTotal = projects.reduce((sum, p) => sum + (p.actualGbpPerYear ?? 0), 0)
+  const actualTotal =
+    projects.reduce((sum, p) => sum + (p.actualGbpPerYear ?? 0), 0) + BUY_VS_BUILD_DEV_GBP_PER_YEAR
 
   return (
     <section className="mx-auto max-w-6xl px-6 py-20">
@@ -55,7 +57,7 @@ export default function BuyVsBuild() {
         </RevealOnScroll>
         <RevealOnScroll delay={180}>
           <Stat
-            label="My actual AWS + Render + LLM"
+            label="My actual AWS + LLM + dev"
             value={
               allActualsKnown ? (
                 <>
@@ -142,6 +144,17 @@ export default function BuyVsBuild() {
                     </td>
                   </tr>
                 ))}
+                <tr className="border-t border-white/[0.07] align-top">
+                  <td className="px-5 py-5">
+                    <p className="font-serif text-base font-semibold text-white">Development tooling</p>
+                    <p className="mt-1.5 text-xs leading-relaxed text-slate-300">Claude Code, £15/month, shared across all projects.</p>
+                  </td>
+                  <td className="px-5 py-5 text-slate-400">—</td>
+                  <td className="px-5 py-5 text-right font-mono text-slate-400">—</td>
+                  <td className="whitespace-nowrap px-5 py-5 text-right font-mono tabular-nums text-slate-100">
+                    {gbp(BUY_VS_BUILD_DEV_GBP_PER_YEAR)}
+                  </td>
+                </tr>
               </tbody>
               <tfoot>
                 <tr className="border-t border-gold/30 bg-gold/[0.06] font-semibold text-white">

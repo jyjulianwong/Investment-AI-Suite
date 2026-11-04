@@ -1,8 +1,48 @@
 /**
  * Data for the "Why Build It Myself and Not Buy?" section.
  * Edit prices, notes and actual costs here; the section re-renders from this file.
- * Costs are per year (£). Set `actualGbpPerYear` to a number once real AWS / Render / LLM bills are known.
+ * Costs are per year (£). `actualGbpPerYear` is derived from the raw bills below.
  */
+
+/* ---------------------------------------------------------------------------
+ * SOURCE RECORD: my real running costs (raw figures as supplied)
+ *
+ * Infrastructure, updated 2026-10-31 (USD / month):
+ *   AWS ECR: 0.05  - shared by Investment News Analysis AI, Market Regime Detector
+ *   AWS S3:  0.04  - shared by Investment News Analysis AI, Market Regime Detector,
+ *                    S3 for TradingAgents
+ * LLM, updated 2026-09-30 (USD / month):
+ *   TradingAgents: 7.68
+ *   Investment News Analysis AI: 1.99
+ * Render (API serving platform): costs nothing, so it is excluded everywhere.
+ * Dev costs: Claude Code GBP 15.00 / month (not project-specific).
+ *
+ * Method: split each shared resource equally between the projects using it,
+ * add each project's own LLM cost, multiply by 12, convert USD -> GBP at
+ * USD_TO_GBP, and round to whole pounds. Fund Reporting AI and Turtle
+ * Quant 1 have no running costs (set to 0). Claude Code is added to the totals.
+ * ------------------------------------------------------------------------- */
+
+/** Assumed rough exchange rate; not checked against live rates. Edit as needed. */
+const USD_TO_GBP = 0.75
+
+const AWS_ECR_USD_PM = 0.05
+const AWS_S3_USD_PM = 0.04
+const LLM_TRADINGAGENTS_USD_PM = 7.68
+const LLM_NEWS_USD_PM = 1.99
+
+/** Dev tooling (Claude Code), GBP per month. Counted in the headline and table totals. */
+const CLAUDE_CODE_GBP_PM = 15
+
+/** Yearly dev tooling cost in £, added on top of the per-project actuals. */
+export const BUY_VS_BUILD_DEV_GBP_PER_YEAR = CLAUDE_CODE_GBP_PM * 12
+
+const usdPmToGbpPy = (usdPerMonth: number) => Math.round(usdPerMonth * 12 * USD_TO_GBP)
+
+// Per project, USD/month:
+const NEWS_USD_PM = AWS_ECR_USD_PM / 2 + AWS_S3_USD_PM / 3 + LLM_NEWS_USD_PM // ≈ 2.03
+const TRADINGAGENTS_USD_PM = AWS_S3_USD_PM / 3 + LLM_TRADINGAGENTS_USD_PM // ≈ 7.69
+const REGIME_USD_PM = AWS_ECR_USD_PM / 2 + AWS_S3_USD_PM / 3 // ≈ 0.04
 
 export const BUY_VS_BUILD_AS_OF = 'October 2026'
 
@@ -27,7 +67,7 @@ export interface BuyVsBuildProject {
   /** Optional display range, e.g. "£72–168" */
   range?: string
   caveats: string[]
-  /** My real running cost (AWS, Render, LLM) in £/yr. null = not recorded yet. */
+  /** My real running cost (AWS, LLM) in £/yr. null = not recorded yet. */
   actualGbpPerYear: number | null
 }
 
@@ -42,7 +82,7 @@ export const BUY_VS_BUILD_PROJECTS: BuyVsBuildProject[] = [
     ],
     estimateGbpPerYear: 250,
     caveats: [],
-    actualGbpPerYear: null,
+    actualGbpPerYear: usdPmToGbpPy(NEWS_USD_PM),
   },
   {
     name: 'TradingAgents-Funds + Runner + S3 Browser',
@@ -56,7 +96,7 @@ export const BUY_VS_BUILD_PROJECTS: BuyVsBuildProject[] = [
       'No SaaS does multi-agent reports on UK fund ISINs.',
       'Seeking Alpha is US-centric, so likely covers UK OEICs poorly.',
     ],
-    actualGbpPerYear: null,
+    actualGbpPerYear: usdPmToGbpPy(TRADINGAGENTS_USD_PM),
   },
   {
     name: 'Investment Fund Reporting AI',
@@ -68,7 +108,7 @@ export const BUY_VS_BUILD_PROJECTS: BuyVsBuildProject[] = [
     estimateGbpPerYear: 120,
     range: '£72–168',
     caveats: ['Gives performance, dividend and valuation reports, but probably not the exact P&L and balance sheet layout.'],
-    actualGbpPerYear: null,
+    actualGbpPerYear: 0,
   },
   {
     name: 'Turtle Quant 1',
@@ -81,7 +121,7 @@ export const BUY_VS_BUILD_PROJECTS: BuyVsBuildProject[] = [
     estimateGbpPerYear: 280,
     range: '£120–575',
     caveats: ['Hyperparameter tuning and Cloud Run jobs have no SaaS equivalent.'],
-    actualGbpPerYear: null,
+    actualGbpPerYear: 0,
   },
   {
     name: 'Market Regime Detector',
@@ -93,7 +133,7 @@ export const BUY_VS_BUILD_PROJECTS: BuyVsBuildProject[] = [
     estimateGbpPerYear: 375,
     range: '~£270 (Early Look only)–375',
     caveats: ['Their quads are their own US-focused view, not a nowcast model you control.'],
-    actualGbpPerYear: null,
+    actualGbpPerYear: usdPmToGbpPy(REGIME_USD_PM),
   },
 ]
 
@@ -102,5 +142,7 @@ export const BUY_VS_BUILD_TOTAL_RANGE = '£950–1,600'
 
 export const BUY_VS_BUILD_FOOTNOTES = [
   'Excludes the extra LLM spend for the TradingAgents runs, since SaaS wouldn\'t replicate that depth.',
-  'Next step: compare against actual AWS, Render and LLM bills.',
+  'My actual costs: AWS as of 31 Oct 2026, LLM as of 30 Sep 2026; USD converted at a rough $1 = £0.75. Shared AWS resources (ECR, S3) are split equally between the projects using them.',
+  'Render hosts the API for free, so it adds nothing. Fund Reporting AI and Turtle Quant 1 have no running costs.',
+  `The actual total includes Claude Code for development, £${CLAUDE_CODE_GBP_PM}/month (£${BUY_VS_BUILD_DEV_GBP_PER_YEAR}/yr).`,
 ]

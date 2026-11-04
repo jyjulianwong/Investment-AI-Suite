@@ -55,7 +55,7 @@ export default function BuyVsBuild() {
         </RevealOnScroll>
         <RevealOnScroll delay={180}>
           <Stat
-            label="My actual AWS + Render + LLM"
+            label="My actual AWS + LLM"
             value={
               allActualsKnown ? (
                 <>

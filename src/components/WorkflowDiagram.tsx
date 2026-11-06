@@ -58,7 +58,7 @@ type WfEdge = Edge<EdgeData, 'flow'>
 export default function WorkflowDiagram() {
   return (
     <section className="mx-auto max-w-6xl px-6 py-20">
-      <SectionHeading index="02" title="How the suite fits together">
+      <SectionHeading index="02" title="How the Suite fits together">
         Market regime and news analysis run in parallel upstream, and both feed TradingAgents-Funds. Its reports then
         flow through the runner into S3 and out to the browser.
       </SectionHeading>

@@ -56,9 +56,11 @@ type EdgeData = {
 type WfEdge = Edge<EdgeData, 'flow'>
 
 export default function WorkflowDiagram() {
+  // Mirrors the tools grid breakpoint (md:grid-cols-2) so the stagger restarts on each row.
+  const twoCols = useMediaQuery('(min-width: 768px)')
   return (
     <section className="mx-auto max-w-6xl px-6 py-20">
-      <SectionHeading index="02" title="How the Suite fits together">
+      <SectionHeading index="02" title="How the Suite Fits Together">
         Market regime and news analysis run in parallel upstream, and both feed TradingAgents-Funds. Its reports then
         flow through the runner into S3 and out to the browser.
       </SectionHeading>
@@ -80,7 +82,7 @@ export default function WorkflowDiagram() {
         </p>
         <div className="grid gap-4 md:grid-cols-2">
           {STANDALONE_TOOLS.map((tool, i) => (
-            <RevealOnScroll key={tool.name} delay={i * 100}>
+            <RevealOnScroll key={tool.name} delay={(i % (twoCols ? 2 : 1)) * 100}>
               <RepoLink name={tool.name} href={tool.href} role={tool.role} />
             </RevealOnScroll>
           ))}
@@ -143,9 +145,9 @@ function WorkflowGraph() {
 
   return (
     <div
-      className={wide ? 'h-[700px]' : 'h-[1500px]'}
+      className={wide ? 'h-[700px]' : 'h-[1300px]'}
       role="group"
-      aria-label="Workflow diagram: Market Regime Detector and Investment News Analysis AI feed TradingAgents-Funds, which feeds the Runner, S3 bucket and S3 Browser"
+      aria-label="Workflow diagram: Market Regime Detector and Investment News Analysis AI feed TradingAgents-Funds, which feeds the Runner and S3 Browser"
     >
       <ReactFlow
         key={wide ? 'wide' : 'narrow'}

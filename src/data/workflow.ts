@@ -34,7 +34,7 @@ export const NODE_WIDTH = 260
  *            [ News Analysis ]
  *   [ Regime ] ─────────────── [ TradingAgents-Funds ]
  *                                        │
- *   [ S3 Browser ] ◄ [ S3 ] ◄ [ Runner ] ◄
+ *               [ S3 Browser ] ◄ [ Runner ] ◄
  *
  * Narrow layout (mobile) is a single column with the Regime → TradingAgents-Funds
  * edge bypassing the News node on its left.
@@ -77,21 +77,13 @@ export const WORKFLOW_NODES: WorkflowNodeSpec[] = [
     narrow: { x: 0, y: 745 },
   },
   {
-    id: 's3',
-    name: 'AWS S3 Bucket',
-    tag: 'Storage',
-    role: 'Publicly accessible storage for the generated PDF reports',
-    wide: { x: 400, y: 500 },
-    narrow: { x: 0, y: 1000 },
-  },
-  {
     id: 'browser',
     name: 'S3 Browser',
     tag: 'Viewer',
     href: `${GITHUB_BASE}/S3-Browser-TradingAgents-Funds-Runner`,
     role: 'GitHub Pages-hosted file browser configured to list and open the PDF reports stored in the S3 bucket',
-    wide: { x: 0, y: 500 },
-    narrow: { x: 0, y: 1200 },
+    wide: { x: 400, y: 500 },
+    narrow: { x: 0, y: 1000 },
   },
 ]
 
@@ -129,18 +121,10 @@ export const WORKFLOW_EDGES: WorkflowEdgeSpec[] = [
     narrow: { from: 'b', to: 't' },
   },
   {
-    id: 'runner-s3',
+    id: 'runner-browser',
     source: 'runner',
-    target: 's3',
-    label: 'uploads PDFs',
-    wide: { from: 'l', to: 'r' },
-    narrow: { from: 'b', to: 't' },
-  },
-  {
-    id: 's3-browser',
-    source: 's3',
     target: 'browser',
-    label: 'browsed via',
+    label: 'uploads PDFs to S3',
     wide: { from: 'l', to: 'r' },
     narrow: { from: 'b', to: 't' },
   },

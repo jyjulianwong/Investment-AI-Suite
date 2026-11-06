@@ -56,6 +56,8 @@ type EdgeData = {
 type WfEdge = Edge<EdgeData, 'flow'>
 
 export default function WorkflowDiagram() {
+  // Mirrors the tools grid breakpoint (md:grid-cols-2) so the stagger restarts on each row.
+  const twoCols = useMediaQuery('(min-width: 768px)')
   return (
     <section className="mx-auto max-w-6xl px-6 py-20">
       <SectionHeading index="02" title="How the Suite fits together">
@@ -80,7 +82,7 @@ export default function WorkflowDiagram() {
         </p>
         <div className="grid gap-4 md:grid-cols-2">
           {STANDALONE_TOOLS.map((tool, i) => (
-            <RevealOnScroll key={tool.name} delay={i * 100}>
+            <RevealOnScroll key={tool.name} delay={(i % (twoCols ? 2 : 1)) * 100}>
               <RepoLink name={tool.name} href={tool.href} role={tool.role} />
             </RevealOnScroll>
           ))}

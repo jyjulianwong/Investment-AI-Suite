@@ -27,7 +27,7 @@ Three places need updating — see `CLAUDE.md` for the full checklist:
 
 1. `src/data/repos.ts` — append `{ owner: 'jyjulianwong', name: 'Your-New-Repo' }` to the `REPOS` array (metadata is fetched live from the GitHub API).
 2. `README.md` — add a row to the table above.
-3. `src/components/WorkflowDiagram.tsx` — add a node to the "How the suite fits together" diagram.
+3. `src/data/workflow.ts` — add a node (and its edges) to the "How the suite fits together" graph; positions are set per layout (wide/narrow).
 
 ## Deployment
 
